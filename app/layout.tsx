@@ -63,15 +63,20 @@ export default function RootLayout({
           href="https://wa.me/919511696861?text=Hello%20Optic%20Vision%20Nagpur!%20Main%20eyewear%20designs%20ke%20baare%20mein%20poochhna%20chahta%20hoon."
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-28 right-6 md:bottom-6 md:right-6 z-40 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#20ba56] hover:scale-110 active:scale-95 transition-all duration-150 flex items-center justify-center"
+          className="fixed bottom-28 right-6 md:bottom-6 md:right-6 z-40 w-14 h-14 bg-[#25D366] text-white rounded-full shadow-xl hover:shadow-[0_8px_30px_rgb(37,211,102,0.4)] hover:bg-[#128C7E] hover:scale-110 active:scale-95 transition-all duration-300 flex items-center justify-center group animate-bounce-subtle"
           title="Chat on WhatsApp"
         >
-          <svg 
-            xmlns="http://www.w3.org/2000/svg" 
-            viewBox="0 0 24 24" 
-            className="w-8 h-8 fill-white"
+          {/* Ambient Pulse Glow */}
+          <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-40 animate-ping pointer-events-none group-hover:hidden"></span>
+
+          {/* Authentic WhatsApp SVG Icon */}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 448 512"
+            fill="currentColor"
+            className="w-8 h-8 z-10 transition-transform duration-300 group-hover:rotate-12"
           >
-            <path d="M12.004 2C6.48 2 2 6.48 2 12.004c0 1.762.463 3.417 1.277 4.856L2 22l5.302-1.226c1.39.774 2.974 1.23 4.702 1.23 5.524 0 10.004-4.48 10.004-10.004C22.008 6.48 17.528 2 12.004 2zm5.682 14.303c-.247.696-1.203 1.272-1.657 1.328-.396.048-.912.084-2.52-.556-2.064-.82-3.376-2.916-3.48-3.056-.104-.136-.832-1.108-.832-2.112 0-1.004.524-1.496.712-1.7.188-.204.412-.256.548-.256.136 0 .272.004.388.008.12.004.284-.044.444.34.164.396.564 1.376.612 1.472.048.096.08.208.016.336-.064.128-.096.208-.192.32-.096.112-.204.252-.292.348-.1.108-.204.224-.088.424.116.196.516.852 1.108 1.38.764.68 1.408.892 1.612.98.204.088.324.076.444-.064.12-.14.516-.6.656-.804.14-.204.28-.168.472-.096.192.072 1.22.576 1.428.68.208.104.348.156.396.24.048.084.048.5-.2 1.196z" />
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z" />
           </svg>
         </a>
       </body>

@@ -26,14 +26,14 @@ export const FrameCard: React.FC<FrameCardProps> = ({ frame }) => {
 
   return (
     <Link href={`/catalog/${frame.id}`} className="group flex flex-col gap-4">
-      <div className="relative aspect-[4/3] overflow-hidden rounded-3xl bg-[var(--color-surface-raised)] border border-[var(--color-border)] group-hover:border-[var(--color-primary-light)] transition-all duration-300 shadow-xs group-hover:shadow-sm">
+      <div className="relative aspect-[3/4] overflow-hidden rounded-3xl bg-[var(--color-surface-raised)] border border-[var(--color-border)] group-hover:border-[var(--color-primary-light)] transition-all duration-300 shadow-xs group-hover:shadow-sm">
         {frame.images && frame.images[0] ? (
           <Image
             src={frame.images[0]}
             alt={frame.name}
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-            className="object-cover transition-transform duration-[1.5s] group-hover:scale-105"
+            className="object-cover object-center transition-transform duration-[1.5s] group-hover:scale-105"
             referrerPolicy="no-referrer"
             loading="lazy"
           />
@@ -44,7 +44,7 @@ export const FrameCard: React.FC<FrameCardProps> = ({ frame }) => {
         )}
 
         {/* Stock Badge */}
-        <div className="absolute top-4 left-4 z-10">
+        <div className="absolute top-3 left-3 z-10">
           <Badge variant={inStock ? "success" : "danger"}>
             {inStock ? "In Stock" : "Abhi nahi hai"}
           </Badge>
@@ -61,7 +61,7 @@ export const FrameCard: React.FC<FrameCardProps> = ({ frame }) => {
         {inStock && (
           <button
             onClick={handleAddToCart}
-            className="absolute bottom-4 right-4 z-10 bg-[var(--color-cta)] text-[var(--color-cta-text)] w-12 h-12 rounded-2xl flex items-center justify-center shadow-md hover:bg-[var(--color-cta-dark)] active:scale-90 transition-all opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0"
+            className="absolute bottom-3 left-1/2 -translate-x-1/2 z-10 bg-[var(--color-cta)]/90 text-[var(--color-cta-text)] w-10 h-10 rounded-xl flex items-center justify-center shadow-md hover:bg-[var(--color-cta)] active:scale-90 transition-all"
             title="Cart mein daalo"
           >
             <ShoppingCart className="w-5 h-5" />
@@ -87,3 +87,4 @@ export const FrameCard: React.FC<FrameCardProps> = ({ frame }) => {
 };
 
 export default FrameCard;
+
