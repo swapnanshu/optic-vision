@@ -5,8 +5,8 @@ const ASSETS_TO_CACHE = [
   '/',
   '/offline',
   '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
+  '/icons/logo-192.png',
+  '/icons/logo-512.png',
   '/icons/apple-touch-icon.png'
 ];
 
