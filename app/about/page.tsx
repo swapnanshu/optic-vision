@@ -4,7 +4,7 @@ import { Card } from '@/components/ui/Card';
 export default function AboutPage() {
   const whatsappNumber = '919876543210';
   const phoneNumber = '07123456789';
-  const fullAddress = 'NayanStore Boutique, Near Dharampeth Metro Station, Dharampeth, Nagpur, Maharashtra 440010';
+  const fullAddress = 'Optic Vision Boutique, Near Dharampeth Metro Station, Dharampeth, Nagpur, Maharashtra 440010';
 
   const businessHours = [
     { day: 'Monday', hours: '10:00 AM - 8:00 PM', closed: false },
@@ -24,7 +24,7 @@ export default function AboutPage() {
           About Us 🏬
         </span>
         <h1 className="text-4xl md:text-5xl font-extrabold text-[var(--color-text-primary)] mb-4 tracking-tighter">
-          NayanStore Nagpur
+          Optic Vision Nagpur
         </h1>
         <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto font-semibold leading-relaxed">
           Nagpur ki sabse stylish optical boutique. Hum yahan eyewear designs ko personalized precision aur premium care ke sath present karte hain.
@@ -42,7 +42,7 @@ export default function AboutPage() {
               Premium Eyewear, Local Heart ❤️
             </h2>
             <p className="text-sm md:text-base font-semibold text-[var(--color-text-secondary)] leading-relaxed mb-4">
-              NayanStore Dharampeth, Nagpur mein modern digital eye checks aur custom frame pairings ka ek exclusive standard lead karta hai. Har piece ko pure aur select material ke sath structure kiya gaya hai taaki long-term durability aur comfort dono mile.
+              Optic Vision Dharampeth, Nagpur mein modern digital eye checks aur custom frame pairings ka ek exclusive standard lead karta hai. Har piece ko pure aur select material ke sath structure kiya gaya hai taaki long-term durability aur comfort dono mile.
             </p>
             <p className="text-sm md:text-base font-semibold text-[var(--color-text-secondary)] leading-relaxed">
               Nagpur ke stylish creatives aur families ke liye, hum har glass ko personalized eye parameters ke anusaar configure karte hain, jisse absolute focal precision aur aesthetic look dono guarantee hota hai.

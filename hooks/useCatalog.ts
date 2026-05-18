@@ -9,7 +9,7 @@ import { products } from '@/lib/data';
 export const mockFrames: Frame[] = products.map((p) => ({
   id: p.id,
   name: p.name,
-  brand: 'NayanStore',
+  brand: 'Optic Vision',
   category: (p.id === 'nagpur-noir' || p.id === 'crystal-clear' || p.id === 'urban-tortoise') ? 'eyeglasses' : 'sunglasses',
   frameStyle: (p.category.toLowerCase() === 'rectangular' ? 'rectangle' : p.category.toLowerCase()) as any,
   frameMaterial: p.id === 'nagpur-noir' ? 'acetate' : 'metal',

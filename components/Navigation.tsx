@@ -48,15 +48,13 @@ export default function Navigation() {
     <>
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/90 backdrop-blur-md flex justify-between items-center px-5 md:px-16 py-4 h-20 border-b border-outline-variant/30 text-primary">
         <div className="flex items-center gap-4">
-          {isCheckout || pathname.startsWith('/product/') ? (
+          {(isCheckout || pathname.startsWith('/product/')) && (
             <Link href={isCheckout ? "/catalog" : "/catalog"} className="active:scale-90 transition-transform">
               <ArrowLeft className="w-6 h-6" />
             </Link>
-          ) : (
-            <button className="active:scale-90 transition-transform"><Menu className="w-6 h-6" /></button>
           )}
           <Link href="/">
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">NayanStore</h1>
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Optic Vision</h1>
           </Link>
         </div>
         <div className="flex items-center gap-5">

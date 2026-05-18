@@ -123,7 +123,7 @@ export default function FaceShapeGuidePage() {
           Free digital eye check-up chahiye?
         </h2>
         <p className="text-sm md:text-base font-bold text-[var(--color-text-secondary)] max-w-xl">
-          NayanStore in Nagpur me certified optometrists se digital eye checkup karwayein. Appointment book karna bilkul free hai!
+          Optic Vision in Nagpur me certified optometrists se digital eye checkup karwayein. Appointment book karna bilkul free hai!
         </p>
         <Link href="/appointments">
           <Button variant="primary">

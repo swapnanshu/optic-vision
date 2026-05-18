@@ -123,7 +123,7 @@ export interface Consultation {
 
 export interface Settings {
   // Store Identity
-  storeName: string;             // "NayanStore"
+  storeName: string;             // "Optic Vision"
   storeAddress: string;          // full address string
   storePhone: string;            // "07123456789"
   storeWhatsApp: string;         // with country code — "919876543210"

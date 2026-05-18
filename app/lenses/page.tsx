@@ -58,7 +58,7 @@ export default function LensesPage() {
           Aapki aankhon ke liye perfect lens
         </h1>
         <p className="text-lg text-[var(--color-text-secondary)] max-w-2xl mx-auto font-semibold leading-relaxed">
-          NayanStore Nagpur mein premium lens design aur coatings choose karein. Kis kaam ke liye kaunsa lens sahi hai, yahan samjhein.
+          Optic Vision Nagpur mein premium lens design aur coatings choose karein. Kis kaam ke liye kaunsa lens sahi hai, yahan samjhein.
         </p>
       </section>
 
@@ -102,7 +102,7 @@ export default function LensesPage() {
           Free digital eye check-up chahiye?
         </h2>
         <p className="text-sm md:text-base font-bold text-[var(--color-text-secondary)] max-w-xl">
-          NayanStore in Nagpur me certified optometrists se digital eye checkup karwayein. Appointment book karna bilkul free hai!
+          Optic Vision in Nagpur me certified optometrists se digital eye checkup karwayein. Appointment book karna bilkul free hai!
         </p>
         <Link href="/appointments">
           <Button variant="primary">

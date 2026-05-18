@@ -143,7 +143,7 @@ export default function FrameDetailPage() {
 
   const handleWhatsAppInquiry = () => {
     const message = encodeURIComponent(
-      `Hi NayanStore Nagpur! Main "${frame.name}" (Color: ${selectedColor || 'Default'}, Size: ${selectedSize}) ke baare mein poochhna chahta hoon.`
+      `Hi Optic Vision Nagpur! Main "${frame.name}" (Color: ${selectedColor || 'Default'}, Size: ${selectedSize}) ke baare mein poochhna chahta hoon.`
     );
     window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
   };
@@ -207,7 +207,7 @@ export default function FrameDetailPage() {
               {frame.name}
             </h1>
             <p className="text-sm font-bold text-[var(--color-text-secondary)] mb-4">
-              Brand: <span className="text-[var(--color-text-primary)]">{frame.brand || 'NayanStore'}</span>
+              Brand: <span className="text-[var(--color-text-primary)]">{frame.brand || 'Optic Vision'}</span>
             </p>
             <div className="flex items-end gap-3">
               <p className="text-3xl font-extrabold text-[var(--color-primary)]">

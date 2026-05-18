@@ -104,7 +104,7 @@ export const useCartStore = create<CartStore>()(
       },
     }),
     {
-      name: 'nayanstore-cart', // key in localStorage
+      name: 'optic-vision-cart', // key in localStorage
     }
   )
 );
