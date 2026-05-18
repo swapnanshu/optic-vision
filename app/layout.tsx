@@ -13,7 +13,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Optic Vision",
+  title: "Optics Vision",
   description:
     "Nagpur ki premium optical boutique — trendy frames, eye tests & custom lenses",
 };
@@ -31,7 +31,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#0D9488" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        <meta name="apple-mobile-web-app-title" content="Optic Vision" />
+        <meta name="apple-mobile-web-app-title" content="Optics Vision" />
 
         {/* Inline script to register custom service worker on client load */}
         <script

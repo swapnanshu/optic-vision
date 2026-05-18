@@ -133,7 +133,7 @@ export interface Consultation {
 
 export interface Settings {
   // Store Identity
-  storeName: string; // "Optic Vision"
+  storeName: string; // "Optics Vision"
   storeAddress: string; // full address string
   storePhone: string; // "9511696861"
   storeWhatsApp: string; // with country code — "919511696861"

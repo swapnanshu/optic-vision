@@ -278,7 +278,7 @@ export default function CheckoutPage() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight mb-2">Aapka Order Place Ho Raha Hai...</h3>
-                  <p className="text-sm font-semibold text-slate-500 max-w-xs leading-relaxed font-sans">Optic Vision Nagpur limits ke andar premium delivery secure kar raha hai.</p>
+                  <p className="text-sm font-semibold text-slate-500 max-w-xs leading-relaxed font-sans">Optics Vision Nagpur limits ke andar premium delivery secure kar raha hai.</p>
                 </div>
               </motion.div>
             )}

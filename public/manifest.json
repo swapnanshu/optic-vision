@@ -1,6 +1,6 @@
 {
-  "name": "Optic Vision",
-  "short_name": "Optic Vision",
+  "name": "Optics Vision",
+  "short_name": "Optics Vision",
   "description": "Nagpur ki stylish optical dukaan — frames, eye tests, ghar pe delivery",
   "start_url": "/",
   "display": "standalone",
@@ -12,7 +12,7 @@
     {
       "name": "Browse Frames",
       "short_name": "Frames",
-      "description": "Explore Optic Vision eyewear designs",
+      "description": "Explore Optics Vision eyewear designs",
       "url": "/catalog",
       "icons": [{ "src": "/icons/logo-192.png", "sizes": "192x192" }]
     },

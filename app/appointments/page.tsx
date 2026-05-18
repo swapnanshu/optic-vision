@@ -206,7 +206,7 @@ export default function AppointmentsPage() {
           </div>
 
           <div className="text-xs font-bold text-[var(--color-text-secondary)] leading-relaxed mb-8 max-w-md mx-auto">
-            💬 Hinglish update: Ek WhatsApp confirmation text hum aapke number <span className="text-[var(--color-text-primary)] font-extrabold">{phone}</span> par bhej rahe hain. Optic Vision Nagpur team aapse confirm karne jald contact karegi!
+            💬 Hinglish update: Ek WhatsApp confirmation text hum aapke number <span className="text-[var(--color-text-primary)] font-extrabold">{phone}</span> par bhej rahe hain. Optics Vision Nagpur team aapse confirm karne jald contact karegi!
           </div>
 
           <div className="flex gap-4">

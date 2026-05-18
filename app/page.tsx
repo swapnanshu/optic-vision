@@ -45,7 +45,7 @@ export default function HomePage() {
       >
         <Image
           src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?q=80&w=1600&auto=format&fit=crop"
-          alt="Premium Optic Vision Boutique"
+          alt="Premium Optics Vision Boutique"
           fill
           className="object-cover group-hover:scale-102 transition-transform duration-[3s]"
           priority

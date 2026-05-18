@@ -95,7 +95,7 @@ export default function Loading() {
           </div>
 
           <h2 className="global-loader-text">
-            Optic Vision
+            Optics Vision
           </h2>
           <p className="global-loader-subtext">
             Loading...

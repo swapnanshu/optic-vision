@@ -54,7 +54,7 @@ export default function Navigation() {
             </Link>
           )}
           <Link href="/">
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Optic Vision</h1>
+            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">Optics Vision</h1>
           </Link>
         </div>
         <div className="flex items-center gap-5">
