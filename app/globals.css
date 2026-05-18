@@ -2,38 +2,45 @@
 @import "tw-animate-css";
 
 @theme {
-  --color-primary: #00685f;
-  --color-primary-container: #008378;
-  --color-on-primary-container: #f4fffc;
-  --color-secondary: #5d5f5e;
-  --color-secondary-container: #dfe0df;
-  --color-on-secondary-container: #616362;
-  --color-tertiary: #825100;
-  --color-tertiary-container: #a36700;
-  --color-on-tertiary-container: #fffbff;
-  --color-background: #fff8f6;
-  --color-on-background: #1e1b1a;
-  --color-surface: #fff8f6;
-  --color-surface-dim: #e1d8d6;
-  --color-surface-container-lowest: #ffffff;
-  --color-surface-container-low: #fbf2f0;
-  --color-surface-container: #f5ecea;
-  --color-surface-container-high: #efe6e4;
-  --color-surface-container-highest: #e9e1df;
-  --color-on-surface: #1e1b1a;
-  --color-on-surface-variant: #3d4947;
-  --color-outline: #6d7a77;
-  --color-outline-variant: #bcc9c6;
-  --color-error: #ba1a1a;
-  --color-on-error: #ffffff;
-  --color-error-container: #ffdad6;
-  --color-on-error-container: #93000a;
+  /* Brand Primary — teal-600 */
+  --color-primary:        #0D9488;
+  --color-primary-light:  #CCFBF1;   /* teal-100 — hover states, selected chips */
+  --color-primary-dark:   #0F766E;   /* teal-700 — pressed states */
+  --color-primary-subtle: #F0FDFA;   /* teal-50 — section backgrounds */
 
-  --font-sans: var(--font-sans);
+  /* CTA — amber-500 */
+  --color-cta:            #F59E0B;
+  --color-cta-dark:       #B45309;   /* amber-700 — hover/pressed */
+  --color-cta-text:       #FFFFFF;
+
+  /* Backgrounds */
+  --color-bg:             #FAFAF9;   /* warm off-white — NOT pure white */
+  --color-surface:        #FFFFFF;   /* cards, modals, inputs */
+  --color-surface-raised: #F8FAFC;   /* alternate row, subtle lift */
+
+  /* Text */
+  --color-text-primary:   #1E293B;   /* slate-800 */
+  --color-text-secondary: #64748B;   /* slate-500 */
+  --color-text-muted:     #94A3B8;   /* slate-400 — placeholders */
+
+  /* Borders */
+  --color-border:         #E2E8F0;   /* slate-200 */
+  --color-border-focus:   #0D9488;   /* primary on focus */
+
+  /* Semantic */
+  --color-success:        #10B981;   /* emerald-500 — in stock */
+  --color-danger:         #EF4444;   /* red-500 — out of stock, errors */
+  --color-warning:        #F59E0B;   /* amber-500 — low stock */
+
+  --font-sans: var(--font-jakarta), system-ui, -apple-system, sans-serif;
 }
 
 body {
-  @apply bg-background text-on-background font-sans antialiased;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Utilities */
@@ -44,3 +51,4 @@ body {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+

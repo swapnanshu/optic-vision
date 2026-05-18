@@ -7,9 +7,11 @@ import {
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import Image from 'next/image';
+import { useCart } from '@/hooks/useCart';
 
 export default function Navigation() {
   const pathname = usePathname();
+  const { itemCount } = useCart();
 
   if (pathname.startsWith('/admin')) {
     return (
@@ -58,8 +60,13 @@ export default function Navigation() {
           </Link>
         </div>
         <div className="flex items-center gap-5">
-          <Link href="/checkout" className="active:scale-90 transition-transform">
+          <Link href="/checkout" className="active:scale-90 transition-transform relative">
             <ShoppingBag className="w-6 h-6" />
+            {itemCount > 0 && (
+              <span className="absolute -top-1.5 -right-1.5 bg-[var(--color-primary)] text-white text-[10px] font-extrabold w-5 h-5 rounded-full flex items-center justify-center border-2 border-white animate-pulse">
+                {itemCount}
+              </span>
+            )}
           </Link>
           <Link href="/admin" className="active:scale-90 transition-transform hidden md:block">
             <User className="w-6 h-6" />
@@ -68,11 +75,11 @@ export default function Navigation() {
       </header>
 
       {!isCheckout && (
-        <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-surface pb-6 pt-3 px-4 shadow-[0_-4px_20px_0_rgba(13,148,136,0.1)] rounded-t-[2rem] md:hidden">
+        <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center bg-surface/80 backdrop-blur-md pb-6 pt-3 px-4 shadow-[0_-4px_20px_0_rgba(13,148,136,0.08)] border-t border-[var(--color-border)]/50 rounded-t-[2rem] md:hidden">
           <NavItem href="/" icon={Home} label="Home" active={pathname === '/'} />
-          <NavItem href="/catalog" icon={LayoutGrid} label="Catalog" active={pathname === '/catalog'} />
-          <NavItem href="#" icon={Calendar} label="Book" />
-          <NavItem href="/admin" icon={User} label="Account" />
+          <NavItem href="/catalog" icon={LayoutGrid} label="Catalog" active={pathname === '/catalog' || pathname.startsWith('/catalog/')} />
+          <NavItem href="/appointments" icon={Calendar} label="Book" active={pathname === '/appointments'} />
+          <NavItem href="/admin" icon={User} label="Account" active={pathname === '/admin'} />
         </nav>
       )}
     </>

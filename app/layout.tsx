@@ -1,23 +1,44 @@
 import type {Metadata} from 'next';
-import { Plus_Jakarta_Sans, Geist } from 'next/font/google';
+import { Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import Navigation from '@/components/Navigation';
 import { cn } from "@/lib/utils";
+import { ToastProvider } from '@/components/ui/Toast';
+import { MessageCircle } from 'lucide-react';
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const jakarta = Plus_Jakarta_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800'],
+  variable: '--font-jakarta',
+});
 
 export const metadata: Metadata = {
   title: 'NayanStore',
-  description: "Nagpur's Finest Eyewear",
+  description: "Nagpur ki sabse stylish optical boutique",
 };
 
 export default function RootLayout({children}: {children: React.ReactNode}) {
   return (
-    <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className="font-sans antialiased text-on-background bg-background md:pb-0" suppressHydrationWarning>
+    <html lang="en" className={cn("font-sans", jakarta.variable)}>
+      <body suppressHydrationWarning className="relative min-h-screen">
+        <ToastProvider />
         <Navigation />
         {children}
+        
+        {/* Global WhatsApp FAB */}
+        <a
+          href="https://wa.me/919876543210?text=Hello%20NayanStore%20Nagpur!%20Main%20eyewear%20designs%20ke%20baare%20mein%20poochhna%20chahta%20hoon."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="fixed bottom-28 right-6 md:bottom-6 md:right-6 z-40 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:bg-[#20ba56] hover:scale-110 active:scale-95 transition-all duration-150 flex items-center justify-center"
+          title="Chat on WhatsApp"
+        >
+          <MessageCircle className="w-7 h-7" />
+        </a>
       </body>
     </html>
   );
 }
+
+
+
