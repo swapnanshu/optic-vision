@@ -1,15 +1,23 @@
-'use client';
+"use client";
 
-import { motion } from 'motion/react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { Calendar, Store, Home as HomeIcon, ArrowRight, ShieldCheck, Eye, Compass } from 'lucide-react';
-import { useCatalog } from '@/hooks/useCatalog';
-import { useFilterStore } from '@/store/filterStore';
-import { FrameCard } from '@/components/catalog/FrameCard';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/Card';
+import { motion } from "motion/react";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import {
+  Calendar,
+  Store,
+  Home as HomeIcon,
+  ArrowRight,
+  ShieldCheck,
+  Eye,
+  Compass,
+} from "lucide-react";
+import { useCatalog } from "@/hooks/useCatalog";
+import { useFilterStore } from "@/store/filterStore";
+import { FrameCard } from "@/components/catalog/FrameCard";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/Card";
 
 export default function HomePage() {
   const router = useRouter();
@@ -20,20 +28,19 @@ export default function HomePage() {
   // Filter trending frames from cached catalog
   const trendingFrames = frames.filter((f) => f.isTrending).slice(0, 6);
 
-  const handleCategorySelect = (cat: 'eyeglasses' | 'sunglasses') => {
+  const handleCategorySelect = (cat: "eyeglasses" | "sunglasses") => {
     clearAllFilters();
-    setFilter('category', cat);
-    router.push('/catalog');
+    setFilter("category", cat);
+    router.push("/catalog");
   };
 
   return (
     <main className="pt-24 pb-32 max-w-7xl mx-auto px-5 md:px-16 overflow-x-hidden">
-      
       {/* Hero section */}
       <motion.section
         initial={{ opacity: 0, scale: 0.98 }}
         animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.6, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
         className="relative aspect-[3/4] md:aspect-[21/9] rounded-[2.5rem] overflow-hidden group shadow-md border border-[var(--color-border)]"
       >
         <Image
@@ -45,16 +52,20 @@ export default function HomePage() {
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-teal-950/80 via-black/30 to-transparent" />
-        
+
         <div className="absolute bottom-0 left-0 p-8 md:p-14 w-full">
           <span className="text-[var(--color-cta)] font-extrabold text-xs md:text-sm uppercase tracking-[0.2em] block mb-2">
             Nagpur's Finest Optical Boutique
           </span>
           <h2 className="text-[2.2rem] md:text-6xl font-extrabold text-white leading-tight mb-6 tracking-tighter">
-            Aankhon ki jaanch <br />book karo
+            Aankhon ki jaanch <br />
+            book karo
           </h2>
           <Link href="/appointments">
-            <Button variant="primary" className="text-base uppercase tracking-wider font-extrabold shadow-lg">
+            <Button
+              variant="primary"
+              className="text-base uppercase tracking-wider font-extrabold shadow-lg"
+            >
               BOOK EYE TEST 📅
             </Button>
           </Link>
@@ -64,7 +75,7 @@ export default function HomePage() {
       {/* Services Bento Grid / Categories row */}
       <section className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
         <div
-          onClick={() => handleCategorySelect('eyeglasses')}
+          onClick={() => handleCategorySelect("eyeglasses")}
           className="bg-white p-8 rounded-[2rem] flex flex-col justify-between h-52 md:h-64 border border-[var(--color-border)] hover:border-[var(--color-primary-light)] active:scale-[0.99] transition-all shadow-xs hover:shadow-sm cursor-pointer group"
         >
           <div className="p-3 bg-[var(--color-primary-subtle)] text-[var(--color-primary)] rounded-2xl w-fit border border-[var(--color-primary-light)]">
@@ -81,7 +92,7 @@ export default function HomePage() {
         </div>
 
         <div
-          onClick={() => handleCategorySelect('sunglasses')}
+          onClick={() => handleCategorySelect("sunglasses")}
           className="bg-white p-8 rounded-[2rem] flex flex-col justify-between h-52 md:h-64 border border-[var(--color-border)] hover:border-[var(--color-primary-light)] active:scale-[0.99] transition-all shadow-xs hover:shadow-sm cursor-pointer group"
         >
           <div className="p-3 bg-amber-50 text-amber-600 rounded-2xl w-fit border border-amber-200">
@@ -118,21 +129,25 @@ export default function HomePage() {
         </div>
 
         <div className="flex overflow-x-auto gap-6 pb-6 -mx-5 px-5 md:mx-0 md:px-0 no-scrollbar">
-          {isLoaded ? (
-            trendingFrames.map((frame) => (
-              <div key={frame.id} className="min-w-[280px] md:min-w-[320px] flex-shrink-0">
-                <FrameCard frame={frame} />
-              </div>
-            ))
-          ) : (
-            Array.from({ length: 4 }).map((_, idx) => (
-              <div key={idx} className="min-w-[280px] md:min-w-[320px] flex-shrink-0 flex flex-col gap-4 animate-pulse">
-                <div className="aspect-[4/3] bg-slate-200 rounded-3xl" />
-                <div className="h-6 bg-slate-200 rounded-lg w-3/4" />
-                <div className="h-5 bg-slate-200 rounded-lg w-1/2" />
-              </div>
-            ))
-          )}
+          {isLoaded
+            ? trendingFrames.map((frame) => (
+                <div
+                  key={frame.id}
+                  className="min-w-[280px] md:min-w-[320px] flex-shrink-0"
+                >
+                  <FrameCard frame={frame} />
+                </div>
+              ))
+            : Array.from({ length: 4 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="min-w-[280px] md:min-w-[320px] flex-shrink-0 flex flex-col gap-4 animate-pulse"
+                >
+                  <div className="aspect-[4/3] bg-slate-200 rounded-3xl" />
+                  <div className="h-6 bg-slate-200 rounded-lg w-3/4" />
+                  <div className="h-5 bg-slate-200 rounded-lg w-1/2" />
+                </div>
+              ))}
         </div>
       </section>
 
@@ -146,10 +161,14 @@ export default function HomePage() {
             Aapki screens ke liye correct lens guard!
           </h3>
           <p className="text-base font-semibold text-[var(--color-text-secondary)] leading-relaxed mb-6">
-            Laptop glare aur mobile screens ke pressure se aankhon ko bachane ke liye humare custom Blue Cut aur Photochromic coatings check karein.
+            Laptop glare aur mobile screens ke pressure se aankhon ko bachane ke
+            liye humare custom Blue Cut aur Photochromic coatings check karein.
           </p>
           <Link href="/lenses">
-            <Button variant="secondary" className="text-xs uppercase tracking-wider font-extrabold">
+            <Button
+              variant="secondary"
+              className="text-xs uppercase tracking-wider font-extrabold"
+            >
               Understand Lenses 📖
             </Button>
           </Link>
@@ -166,16 +185,20 @@ export default function HomePage() {
             Kaunsa style aap par suit karega?
           </h3>
           <p className="text-base font-semibold text-[var(--color-text-secondary)] leading-relaxed">
-            Oval, Round, ya Square? Apne chehre ke curves aur angles ke according frames search karein aur local styling test karein.
+            Oval, Round, ya Square? Apne chehre ke curves aur angles ke
+            according frames search karein aur local styling test karein.
           </p>
         </div>
         <Link href="/face-shape-guide" className="shrink-0">
-          <Button variant="primary" className="text-xs uppercase tracking-wider font-extrabold">
+          <Button
+            variant="primary"
+            className="text-xs uppercase tracking-wider font-extrabold"
+          >
             Match My Face Shape 👓
           </Button>
         </Link>
       </section>
-      
+
       {/* Store Location Footer banner */}
       <section className="mt-20 border-t border-[var(--color-border)] pt-16">
         <div className="flex flex-col lg:flex-row gap-10 items-center bg-white border border-[var(--color-border)] rounded-[2.5rem] p-5 lg:p-8 shadow-xs">
@@ -195,16 +218,24 @@ export default function HomePage() {
               Boutique Studio in Dharampeth 🏬
             </h2>
             <p className="text-sm md:text-base font-semibold text-[var(--color-text-secondary)] leading-relaxed mb-6">
-              Dharampeth Metro Station ke bilkul paas, Nagpur. Studio visit karein aur complete collections ka offline fit aur styling experience karein.
+              Dharampeth Metro Station ke bilkul paas, Nagpur. Studio visit
+              karein aur complete collections ka offline fit aur styling
+              experience karein.
             </p>
             <div className="flex gap-4">
               <Link href="/about">
-                <Button variant="secondary" className="text-xs uppercase tracking-wider font-extrabold">
+                <Button
+                  variant="secondary"
+                  className="text-xs uppercase tracking-wider font-extrabold"
+                >
                   View Store Details
                 </Button>
               </Link>
-              <a href="tel:07123456789">
-                <Button variant="ghost" className="text-xs uppercase tracking-wider font-extrabold text-[var(--color-primary)]">
+              <a href="tel:9511696861">
+                <Button
+                  variant="ghost"
+                  className="text-xs uppercase tracking-wider font-extrabold text-[var(--color-primary)]"
+                >
                   Call Us
                 </Button>
               </a>

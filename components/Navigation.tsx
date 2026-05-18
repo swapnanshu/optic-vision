@@ -86,15 +86,22 @@ export default function Navigation() {
 
 function NavItem({ href, icon: Icon, label, active }: { href: string, icon: any, label: string, active?: boolean }) {
   return (
-    <Link href={href} className="flex flex-col items-center justify-center relative w-16 group active:scale-90 transition-transform">
-      {active && (
-        <motion.div 
-          layoutId="active-pill" 
-          className="absolute inset-0 bg-primary-container rounded-full w-16 h-10 -z-10 -mt-1 shadow-sm" 
-        />
-      )}
-      <Icon className={`w-5 h-5 ${active ? 'text-on-primary-container' : 'text-on-surface-variant group-hover:text-primary'}`} />
-      <span className={`text-[11px] mt-1.5 font-bold ${active ? 'text-on-primary-container' : 'text-on-surface-variant group-hover:text-primary'}`}>{label}</span>
+    <Link href={href} className="flex flex-col items-center justify-center w-20 group active:scale-95 transition-transform py-1">
+      {/* Icon wrapper containing active background pill */}
+      <div className="relative w-12 h-8 rounded-full flex items-center justify-center transition-all duration-300">
+        {active && (
+          <motion.div 
+            layoutId="active-pill" 
+            className="absolute inset-0 bg-[var(--color-primary-subtle)] border border-[var(--color-primary-light)] rounded-full -z-10" 
+            transition={{ type: "spring", stiffness: 380, damping: 30 }}
+          />
+        )}
+        <Icon className={`w-5 h-5 transition-colors ${active ? 'text-[var(--color-primary-dark)] stroke-[2.5]' : 'text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary)]'}`} />
+      </div>
+      {/* Text label perfectly positioned below the pill */}
+      <span className={`text-[10px] mt-1 font-extrabold tracking-wide uppercase transition-colors ${active ? 'text-[var(--color-primary-dark)]' : 'text-[var(--color-text-secondary)] group-hover:text-[var(--color-primary)]'}`}>
+        {label}
+      </span>
     </Link>
   )
 }

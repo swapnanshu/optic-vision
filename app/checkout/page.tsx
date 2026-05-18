@@ -30,6 +30,8 @@ export default function CheckoutPage() {
 
   // Steps: 'checkout' | 'completed'
   const [step, setStep] = useState<'checkout' | 'completed'>('checkout');
+  const [orderTotal, setOrderTotal] = useState<number>(0);
+  const [checkoutStatus, setCheckoutStatus] = useState<'idle' | 'placing' | 'success'>('idle');
 
   // Form Fields
   const [name, setName] = useState<string>('');
@@ -81,6 +83,8 @@ export default function CheckoutPage() {
     }
 
     setIsSubmitting(true);
+    setCheckoutStatus('placing');
+    setOrderTotal(subtotal); // Capture order total snapshot BEFORE clearing!
 
     const orderPayload = {
       userId: null,
@@ -134,12 +138,17 @@ export default function CheckoutPage() {
         localStorage.setItem('local_orders', JSON.stringify(existingLocal));
       }
 
-      toast.success('Order successfully placed! 🎉');
-      clearCart();
-      setStep('completed');
+      setCheckoutStatus('success');
+      setTimeout(() => {
+        toast.success('Order successfully placed! 🎉');
+        clearCart();
+        setStep('completed');
+        setCheckoutStatus('idle');
+      }, 2000);
     } catch (err) {
       console.error('Order creation failed:', err);
       toast.error('Order complete nahi ho paya. Kripya dobara try karein.');
+      setCheckoutStatus('idle');
     } finally {
       setIsSubmitting(false);
     }
@@ -199,7 +208,7 @@ export default function CheckoutPage() {
 
             <div className="flex justify-between items-center text-primary-dark bg-primary-subtle p-3 rounded-xl border border-primary-light">
               <span className="text-xs font-bold uppercase tracking-wider">Grand Total (COD):</span>
-              <span className="text-lg font-extrabold">{toDisplay(subtotal)}</span>
+              <span className="text-lg font-extrabold">{toDisplay(orderTotal)}</span>
             </div>
           </div>
 
@@ -246,9 +255,80 @@ export default function CheckoutPage() {
     );
   }
 
-  // Normal Cart List & Checkout Flow
   return (
-    <main className="pt-28 pb-32 max-w-7xl mx-auto px-5 md:px-16 min-h-screen">
+    <>
+      <AnimatePresence>
+        {checkoutStatus !== 'idle' && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-background/95 backdrop-blur-md z-[9999] flex flex-col items-center justify-center p-6 text-center"
+          >
+            {checkoutStatus === 'placing' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                className="flex flex-col items-center justify-center gap-6"
+              >
+                <div className="relative w-24 h-24 flex items-center justify-center">
+                  <div className="absolute inset-0 border-4 border-teal-600/20 border-t-teal-600 border-r-teal-600 rounded-full animate-spin" />
+                  <span className="text-3xl">🛍️</span>
+                </div>
+                <div>
+                  <h3 className="text-2xl font-extrabold text-slate-900 tracking-tight mb-2">Aapka Order Place Ho Raha Hai...</h3>
+                  <p className="text-sm font-semibold text-slate-500 max-w-xs leading-relaxed font-sans">Optic Vision Nagpur limits ke andar premium delivery secure kar raha hai.</p>
+                </div>
+              </motion.div>
+            )}
+
+            {checkoutStatus === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                className="flex flex-col items-center justify-center gap-6"
+              >
+                <div className="w-28 h-28 bg-emerald-50 border border-emerald-100 rounded-full flex items-center justify-center shadow-lg relative overflow-hidden">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 20, delay: 0.1 }}
+                    className="absolute inset-0 bg-emerald-500 rounded-full"
+                  />
+                  <svg
+                    className="w-14 h-14 text-white z-10 stroke-[4]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <motion.path
+                      initial={{ pathLength: 0 }}
+                      animate={{ pathLength: 1 }}
+                      transition={{ duration: 0.6, ease: 'easeOut', delay: 0.4 }}
+                      d="M5 13l4 4L19 7"
+                    />
+                  </svg>
+                </div>
+                <motion.div
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.8 }}
+                >
+                  <h3 className="text-3xl font-extrabold text-slate-900 tracking-tighter mb-2">Successfully Placed! 🎉</h3>
+                  <p className="text-sm font-semibold text-emerald-700 bg-emerald-50 px-4 py-1.5 rounded-full inline-block border border-emerald-100 font-sans">
+                    Aapka slot and order secure ho chuka hai.
+                  </p>
+                </motion.div>
+              </motion.div>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <main className="pt-28 pb-32 max-w-7xl mx-auto px-5 md:px-16 min-h-screen">
       <div className="mb-10">
         <span className="text-[var(--color-primary-dark)] bg-[var(--color-primary-subtle)] border border-[var(--color-primary-light)] px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider inline-block mb-3">
           Your Selected Items 🛒
@@ -499,5 +579,6 @@ export default function CheckoutPage() {
         </div>
       </div>
     </main>
+  </>
   );
 }

@@ -1,19 +1,13 @@
 'use client';
 
-import { WifiOff, RotateCw } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { Compass, Home } from 'lucide-react';
 
-export default function OfflinePage() {
-  const router = useRouter();
-  const handleReload = () => {
-    router.push('/');
-  };
-
+export default function NotFound() {
   return (
     <>
-      {/* Self-contained styling that works beautifully even if globals.css fails to load offline */}
       <style dangerouslySetInnerHTML={{ __html: `
-        .offline-container {
+        .notfound-container {
           box-sizing: border-box;
           min-height: 100vh;
           width: 100vw;
@@ -29,7 +23,7 @@ export default function OfflinePage() {
           left: 0 !important;
           z-index: 99999 !important;
         }
-        .offline-card {
+        .notfound-card {
           background: #ffffff !important;
           border: 1px solid rgba(226, 232, 240, 0.8) !important;
           border-radius: 32px !important;
@@ -42,10 +36,10 @@ export default function OfflinePage() {
           flex-direction: column !important;
           align-items: center !important;
         }
-        .offline-icon-wrap {
-          background: #FEF2F2 !important;
-          border: 1px solid #FEE2E2 !important;
-          color: #EF4444 !important;
+        .notfound-icon-wrap {
+          background: #F0FDFA !important;
+          border: 1px solid #CCFBF1 !important;
+          color: #0D9488 !important;
           border-radius: 9999px !important;
           width: 88px !important;
           height: 88px !important;
@@ -54,7 +48,7 @@ export default function OfflinePage() {
           justify-content: center !important;
           margin-bottom: 24px !important;
         }
-        .offline-title {
+        .notfound-title {
           font-size: 28px !important;
           font-weight: 800 !important;
           letter-spacing: -0.8px !important;
@@ -62,14 +56,14 @@ export default function OfflinePage() {
           color: #0F172A !important;
           line-height: 1.2 !important;
         }
-        .offline-text {
+        .notfound-text {
           font-size: 15px !important;
           font-weight: 600 !important;
           color: #64748B !important;
           line-height: 1.6 !important;
           margin: 0 0 32px 0 !important;
         }
-        .offline-btn {
+        .notfound-btn {
           background: #0D9488 !important;
           color: #ffffff !important;
           font-weight: 800 !important;
@@ -86,35 +80,36 @@ export default function OfflinePage() {
           align-items: center !important;
           justify-content: center !important;
           gap: 8px !important;
+          text-decoration: none !important;
         }
-        .offline-btn:hover {
+        .notfound-btn:hover {
           background: #0F766E !important;
           transform: translateY(-2px) !important;
           box-shadow: 0 6px 16px rgba(13, 148, 136, 0.3) !important;
         }
-        .offline-btn:active {
+        .notfound-btn:active {
           transform: translateY(1px) !important;
         }
       ` }} />
 
-      <div className="offline-container">
-        <div className="offline-card">
-          <div className="offline-icon-wrap">
-            <WifiOff className="w-10 h-10" />
+      <div className="notfound-container">
+        <div className="notfound-card">
+          <div className="notfound-icon-wrap">
+            <Compass className="w-10 h-10 animate-spin" style={{ animationDuration: '10s' }} />
           </div>
 
-          <h1 className="offline-title">
-            Net nahi hai? 📶❌
+          <h1 className="notfound-title">
+            Raasta bhatak gaye? 🗺️🧭
           </h1>
           
-          <p className="offline-text">
-            Nagpur ke weather ki tarah internet bhi thoda down lag raha hai! Kripya apna network connection check karein aur dobara try karein.
+          <p className="notfound-text">
+            Yeh page Nagpur ke purane maps ki tarah lagta hai, jo abhi exist nahi karta! Wapas ghar chalo aur naye frames try karo.
           </p>
 
-          <button onClick={handleReload} className="offline-btn">
-            <RotateCw className="w-4 h-4" />
-            <span>Try Again</span>
-          </button>
+          <Link href="/" className="notfound-btn">
+            <Home className="w-4 h-4" />
+            <span>Ghar Wapas Jao</span>
+          </Link>
         </div>
       </div>
     </>

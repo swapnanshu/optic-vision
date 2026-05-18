@@ -1,25 +1,53 @@
-'use client';
+"use client";
 
-import { useState, useMemo, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { ShoppingCart, Phone, MessageSquare, ChevronDown, ChevronUp, Check } from 'lucide-react';
-import { useCatalog } from '@/hooks/useCatalog';
-import { useCart } from '@/hooks/useCart';
-import { Badge } from '@/components/ui/Badge';
-import { Button } from '@/components/ui/button';
-import { toDisplay } from '@/lib/utils/price';
-import { toast } from '@/components/ui/Toast';
-import { FrameCard } from '@/components/catalog/FrameCard';
-import { Skeleton } from '@/components/ui/Skeleton';
+import { useState, useMemo, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Image from "next/image";
+import {
+  ShoppingCart,
+  Phone,
+  MessageSquare,
+  ChevronDown,
+  ChevronUp,
+  Check,
+  Loader2,
+} from "lucide-react";
+import { useCatalog } from "@/hooks/useCatalog";
+import { useCart } from "@/hooks/useCart";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/button";
+import { toDisplay } from "@/lib/utils/price";
+import { toast } from "@/components/ui/Toast";
+import { FrameCard } from "@/components/catalog/FrameCard";
+import { Skeleton } from "@/components/ui/Skeleton";
 
 // Lens Type Options with descriptions and prices in paise
 const LENS_OPTIONS = {
-  'frame-only': { name: 'Zero Power (Frame Only)', desc: 'Blue-light coating included.', price: 0 },
-  'single-vision': { name: 'Single Vision', desc: 'For distance or reading tasks.', price: 99900 },
-  'blue-cut': { name: 'Blue Cut Screen Guard', desc: 'Blocks digital screen glare and fatigue.', price: 149900 },
-  'progressive': { name: 'Progressive Multi-Focal', desc: 'Clear vision across all distances.', price: 249900 },
-  'photochromic': { name: 'Photochromic (Auto-Darkening)', desc: 'Transitions dark in sunlight, clear indoors.', price: 199900 },
+  "frame-only": {
+    name: "Zero Power (Frame Only)",
+    desc: "Blue-light coating included.",
+    price: 0,
+  },
+  "single-vision": {
+    name: "Single Vision",
+    desc: "For distance or reading tasks.",
+    price: 99900,
+  },
+  "blue-cut": {
+    name: "Blue Cut Screen Guard",
+    desc: "Blocks digital screen glare and fatigue.",
+    price: 149900,
+  },
+  progressive: {
+    name: "Progressive Multi-Focal",
+    desc: "Clear vision across all distances.",
+    price: 249900,
+  },
+  photochromic: {
+    name: "Photochromic (Auto-Darkening)",
+    desc: "Transitions dark in sunlight, clear indoors.",
+    price: 199900,
+  },
 };
 
 export default function FrameDetailPage() {
@@ -29,11 +57,16 @@ export default function FrameDetailPage() {
   const { addItem } = useCart();
 
   // Selected Option States
-  const [selectedColor, setSelectedColor] = useState<string>('');
-  const [selectedSize, setSelectedSize] = useState<'small' | 'medium' | 'large'>('medium');
-  const [selectedLens, setSelectedLens] = useState<keyof typeof LENS_OPTIONS | 'frame-only'>('frame-only');
+  const [selectedColor, setSelectedColor] = useState<string>("");
+  const [selectedSize, setSelectedSize] = useState<
+    "small" | "medium" | "large"
+  >("medium");
+  const [selectedLens, setSelectedLens] = useState<
+    keyof typeof LENS_OPTIONS | "frame-only"
+  >("frame-only");
   const [isDescOpen, setIsDescOpen] = useState(true);
   const [activeImageIdx, setActiveImageIdx] = useState(0);
+  const [isAdding, setIsAdding] = useState(false);
 
   // Retrieve Frame
   const frame = useMemo(() => {
@@ -43,9 +76,11 @@ export default function FrameDetailPage() {
   // Sync selection states when frame loads or navigates to a recommended frame
   useEffect(() => {
     if (frame) {
-      setSelectedColor(frame.colors && frame.colors.length > 0 ? frame.colors[0] : '');
-      setSelectedSize('medium');
-      setSelectedLens('frame-only');
+      setSelectedColor(
+        frame.colors && frame.colors.length > 0 ? frame.colors[0] : "",
+      );
+      setSelectedSize("medium");
+      setSelectedLens("frame-only");
       setActiveImageIdx(0);
     }
   }, [frameId, frame]);
@@ -62,7 +97,6 @@ export default function FrameDetailPage() {
     return (
       <main className="pt-28 pb-32 max-w-7xl mx-auto px-5 md:px-16 min-h-screen">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-start">
-          
           {/* Left Side: Image Gallery / Carousel Skeleton */}
           <div className="lg:col-span-7 flex flex-col gap-5">
             <Skeleton className="relative aspect-[4/3] w-full rounded-[2rem]" />
@@ -119,9 +153,13 @@ export default function FrameDetailPage() {
   if (!frame) {
     return (
       <div className="pt-32 pb-32 max-w-7xl mx-auto px-5 md:px-16 text-center min-h-[50vh] flex flex-col justify-center items-center gap-6">
-        <h2 className="text-3xl font-extrabold text-[var(--color-text-primary)]">Frame nahi mila 🔎</h2>
-        <p className="font-semibold text-[var(--color-text-secondary)]">Yeh design catalog mein available nahi hai.</p>
-        <Button onClick={() => router.push('/catalog')} variant="secondary">
+        <h2 className="text-3xl font-extrabold text-[var(--color-text-primary)]">
+          Frame nahi mila 🔎
+        </h2>
+        <p className="font-semibold text-[var(--color-text-secondary)]">
+          Yeh design catalog mein available nahi hai.
+        </p>
+        <Button onClick={() => router.push("/catalog")} variant="secondary">
           Catalog pe wapas jao
         </Button>
       </div>
@@ -129,29 +167,34 @@ export default function FrameDetailPage() {
   }
 
   const inStock = frame.stock > 0;
-  const currentLensObj = LENS_OPTIONS[selectedLens as keyof typeof LENS_OPTIONS] || LENS_OPTIONS['frame-only'];
+  const currentLensObj =
+    LENS_OPTIONS[selectedLens as keyof typeof LENS_OPTIONS] ||
+    LENS_OPTIONS["frame-only"];
   const totalPricePaise = frame.price + currentLensObj.price;
 
   const handleAddToCart = () => {
     if (!inStock) {
-      toast.error('Sorry, yeh frame abhi out of stock hai!');
+      toast.error("Sorry, yeh frame abhi out of stock hai!");
       return;
     }
-    addItem(frame, 1, currentLensObj.name, currentLensObj.price);
-    toast.success(`${frame.name} cart mein daal diya! 🎉`);
+    setIsAdding(true);
+    setTimeout(() => {
+      addItem(frame, 1, currentLensObj.name, currentLensObj.price);
+      toast.success(`${frame.name} cart mein daal diya! 🎉`);
+      setIsAdding(false);
+    }, 800);
   };
 
   const handleWhatsAppInquiry = () => {
     const message = encodeURIComponent(
-      `Hi Optic Vision Nagpur! Main "${frame.name}" (Color: ${selectedColor || 'Default'}, Size: ${selectedSize}) ke baare mein poochhna chahta hoon.`
+      `Hi Optic Vision Nagpur! Main "${frame.name}" (Color: ${selectedColor || "Default"}, Size: ${selectedSize}) ke baare mein poochhna chahta hoon.`,
     );
-    window.open(`https://wa.me/919876543210?text=${message}`, '_blank');
+    window.open(`https://wa.me/919511696861?text=${message}`, "_blank");
   };
 
   return (
     <main className="pt-28 pb-32 max-w-7xl mx-auto px-5 md:px-16 min-h-screen">
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 md:gap-16 items-start">
-        
         {/* Left Side: Image Gallery / Carousel */}
         <div className="lg:col-span-7 flex flex-col gap-5">
           <div className="relative aspect-[4/3] w-full overflow-hidden rounded-[2rem] bg-[var(--color-surface-raised)] border border-[var(--color-border)] shadow-sm">
@@ -169,11 +212,11 @@ export default function FrameDetailPage() {
                 No Frame Image
               </div>
             )}
-            
+
             {/* Stock Badge */}
             <div className="absolute top-6 left-6 z-10">
-              <Badge variant={inStock ? 'success' : 'danger'}>
-                {inStock ? 'In Stock' : 'Abhi nahi hai'}
+              <Badge variant={inStock ? "success" : "danger"}>
+                {inStock ? "In Stock" : "Abhi nahi hai"}
               </Badge>
             </div>
           </div>
@@ -186,10 +229,18 @@ export default function FrameDetailPage() {
                   key={idx}
                   onClick={() => setActiveImageIdx(idx)}
                   className={`relative w-24 aspect-[4/3] rounded-xl overflow-hidden border-2 bg-slate-50 flex-shrink-0 cursor-pointer transition-all ${
-                    activeImageIdx === idx ? 'border-[var(--color-primary)] scale-105' : 'border-[var(--color-border)] opacity-70'
+                    activeImageIdx === idx
+                      ? "border-[var(--color-primary)] scale-105"
+                      : "border-[var(--color-border)] opacity-70"
                   }`}
                 >
-                  <Image src={img} alt={`Thumb ${idx}`} fill className="object-cover" referrerPolicy="no-referrer" />
+                  <Image
+                    src={img}
+                    alt={`Thumb ${idx}`}
+                    fill
+                    className="object-cover"
+                    referrerPolicy="no-referrer"
+                  />
                 </button>
               ))}
             </div>
@@ -201,19 +252,24 @@ export default function FrameDetailPage() {
           {/* Header Info */}
           <div>
             <span className="text-[var(--color-primary-dark)] bg-[var(--color-primary-subtle)] border border-[var(--color-primary-light)] px-3.5 py-1 rounded-full text-[10px] font-extrabold uppercase tracking-widest inline-block mb-3">
-              {frame.category === 'eyeglasses' ? 'Eyeglasses 👓' : 'Sunglasses 🕶️'}
+              {frame.category === "eyeglasses"
+                ? "Eyeglasses 👓"
+                : "Sunglasses 🕶️"}
             </span>
             <h1 className="text-4xl font-extrabold text-[var(--color-text-primary)] mb-2 tracking-tighter leading-tight">
               {frame.name}
             </h1>
             <p className="text-sm font-bold text-[var(--color-text-secondary)] mb-4">
-              Brand: <span className="text-[var(--color-text-primary)]">{frame.brand || 'Optic Vision'}</span>
+              Brand:{" "}
+              <span className="text-[var(--color-text-primary)]">
+                {frame.brand || "Optic Vision"}
+              </span>
             </p>
             <div className="flex items-end gap-3">
               <p className="text-3xl font-extrabold text-[var(--color-primary)]">
                 {toDisplay(totalPricePaise)}
               </p>
-              {selectedLens !== 'frame-only' && (
+              {selectedLens !== "frame-only" && (
                 <span className="text-xs font-bold text-[var(--color-text-secondary)] pb-1">
                   (Lens added)
                 </span>
@@ -234,11 +290,19 @@ export default function FrameDetailPage() {
                     onClick={() => setSelectedColor(color)}
                     className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold border transition-all cursor-pointer ${
                       selectedColor === color
-                        ? 'border-[var(--color-primary)] bg-[var(--color-primary-subtle)] text-[var(--color-primary-dark)] scale-105 shadow-xs'
-                        : 'border-[var(--color-border)] bg-white text-[var(--color-text-secondary)] hover:bg-slate-50'
+                        ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)] text-[var(--color-primary-dark)] scale-105 shadow-xs"
+                        : "border-[var(--color-border)] bg-white text-[var(--color-text-secondary)] hover:bg-slate-50"
                     }`}
                   >
-                    <span className="w-3.5 h-3.5 rounded-full border border-slate-300" style={{ backgroundColor: color.toLowerCase() === 'clear' ? '#EBF4F6' : color.toLowerCase() }} />
+                    <span
+                      className="w-3.5 h-3.5 rounded-full border border-slate-300"
+                      style={{
+                        backgroundColor:
+                          color.toLowerCase() === "clear"
+                            ? "#EBF4F6"
+                            : color.toLowerCase(),
+                      }}
+                    />
                     <span>{color}</span>
                   </button>
                 ))}
@@ -252,8 +316,10 @@ export default function FrameDetailPage() {
               Select Size:
             </span>
             <div className="flex gap-3">
-              {(['small', 'medium', 'large'] as const).map((size) => {
-                const isCompatible = frame.sizes ? frame.sizes.includes(size) : size === 'medium';
+              {(["small", "medium", "large"] as const).map((size) => {
+                const isCompatible = frame.sizes
+                  ? frame.sizes.includes(size)
+                  : size === "medium";
                 if (!isCompatible) return null;
                 return (
                   <button
@@ -261,8 +327,8 @@ export default function FrameDetailPage() {
                     onClick={() => setSelectedSize(size)}
                     className={`px-5 py-2.5 rounded-xl border text-xs font-extrabold capitalize cursor-pointer transition-all ${
                       selectedSize === size
-                        ? 'border-[var(--color-primary)] bg-[var(--color-primary-subtle)] text-[var(--color-primary-dark)] scale-105'
-                        : 'border-[var(--color-border)] bg-white text-[var(--color-text-secondary)] hover:bg-slate-50'
+                        ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)] text-[var(--color-primary-dark)] scale-105"
+                        : "border-[var(--color-border)] bg-white text-[var(--color-text-secondary)] hover:bg-slate-50"
                     }`}
                   >
                     {size}
@@ -281,24 +347,24 @@ export default function FrameDetailPage() {
               {/* Frame Only */}
               <label
                 className={`flex items-start p-4 rounded-2xl border-2 cursor-pointer transition-all ${
-                  selectedLens === 'frame-only'
-                    ? 'border-[var(--color-primary)] bg-[var(--color-primary-subtle)]/30'
-                    : 'border-[var(--color-border)] hover:bg-slate-50'
+                  selectedLens === "frame-only"
+                    ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)]/30"
+                    : "border-[var(--color-border)] hover:bg-slate-50"
                 }`}
               >
                 <input
                   type="radio"
                   name="lens-type"
-                  checked={selectedLens === 'frame-only'}
-                  onChange={() => setSelectedLens('frame-only')}
+                  checked={selectedLens === "frame-only"}
+                  onChange={() => setSelectedLens("frame-only")}
                   className="mt-1 accent-[var(--color-primary)] h-4 w-4 shrink-0"
                 />
                 <div className="ml-3 flex-grow">
                   <p className="font-extrabold text-sm text-[var(--color-text-primary)]">
-                    {LENS_OPTIONS['frame-only'].name}
+                    {LENS_OPTIONS["frame-only"].name}
                   </p>
                   <p className="text-xs font-semibold text-[var(--color-text-secondary)] mt-0.5">
-                    {LENS_OPTIONS['frame-only'].desc}
+                    {LENS_OPTIONS["frame-only"].desc}
                   </p>
                 </div>
                 <span className="font-extrabold text-sm text-[var(--color-primary)] ml-2">
@@ -308,21 +374,22 @@ export default function FrameDetailPage() {
 
               {/* Compatible Lens */}
               {Object.keys(LENS_OPTIONS)
-                .filter((key) => key !== 'frame-only')
+                .filter((key) => key !== "frame-only")
                 .map((key) => {
                   const isCompatible = frame.lensCompatible
                     ? frame.lensCompatible.includes(key as any)
                     : true;
                   if (!isCompatible) return null;
 
-                  const lensObj = LENS_OPTIONS[key as keyof typeof LENS_OPTIONS];
+                  const lensObj =
+                    LENS_OPTIONS[key as keyof typeof LENS_OPTIONS];
                   return (
                     <label
                       key={key}
                       className={`flex items-start p-4 rounded-2xl border-2 cursor-pointer transition-all ${
                         selectedLens === key
-                          ? 'border-[var(--color-primary)] bg-[var(--color-primary-subtle)]/30'
-                          : 'border-[var(--color-border)] hover:bg-slate-50'
+                          ? "border-[var(--color-primary)] bg-[var(--color-primary-subtle)]/30"
+                          : "border-[var(--color-border)] hover:bg-slate-50"
                       }`}
                     >
                       <input
@@ -353,15 +420,26 @@ export default function FrameDetailPage() {
           <div className="flex flex-col gap-4 mt-2">
             <Button
               onClick={handleAddToCart}
-              disabled={!inStock}
+              disabled={!inStock || isAdding}
               fullWidth
               variant="primary"
-              className="text-base uppercase tracking-widest font-extrabold"
+              className={`text-base uppercase tracking-widest font-extrabold transition-all duration-300 ${
+                isAdding ? "scale-98 bg-emerald-600 border-emerald-600 animate-pulse" : ""
+              }`}
             >
-              <ShoppingCart className="w-5 h-5 mr-2.5" />
-              Cart mein daalo
+              {isAdding ? (
+                <>
+                  <Loader2 className="w-5 h-5 mr-2.5 animate-spin" />
+                  Cart me jaa raha hai... 🚀
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="w-5 h-5 mr-2.5" />
+                  Cart mein daalo
+                </>
+              )}
             </Button>
-            
+
             <Button
               onClick={handleWhatsAppInquiry}
               fullWidth
@@ -380,15 +458,35 @@ export default function FrameDetailPage() {
               className="w-full flex justify-between items-center p-5 font-extrabold text-sm text-[var(--color-text-primary)] bg-slate-50 border-b border-[var(--color-border)] cursor-pointer"
             >
               <span>Frame ke baare mein 🕶️📖</span>
-              {isDescOpen ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+              {isDescOpen ? (
+                <ChevronUp className="w-4 h-4" />
+              ) : (
+                <ChevronDown className="w-4 h-4" />
+              )}
             </button>
             {isDescOpen && (
               <div className="p-5 text-sm text-[var(--color-text-secondary)] font-semibold leading-relaxed">
-                {frame.description || 'Nagpur ka style aur international designs, is frame mein dono milte hain.'}
+                {frame.description ||
+                  "Nagpur ka style aur international designs, is frame mein dono milte hain."}
                 <ul className="mt-3 space-y-1.5 text-xs text-[var(--color-text-primary)]">
-                  <li>✨ Material: <span className="font-extrabold capitalize">{frame.frameMaterial}</span></li>
-                  <li>✨ Style: <span className="font-extrabold capitalize">{frame.frameStyle}</span></li>
-                  <li>✨ Category: <span className="font-extrabold capitalize">{frame.category}</span></li>
+                  <li>
+                    ✨ Material:{" "}
+                    <span className="font-extrabold capitalize">
+                      {frame.frameMaterial}
+                    </span>
+                  </li>
+                  <li>
+                    ✨ Style:{" "}
+                    <span className="font-extrabold capitalize">
+                      {frame.frameStyle}
+                    </span>
+                  </li>
+                  <li>
+                    ✨ Category:{" "}
+                    <span className="font-extrabold capitalize">
+                      {frame.category}
+                    </span>
+                  </li>
                 </ul>
               </div>
             )}
