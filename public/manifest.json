@@ -33,14 +33,14 @@
   ],
   "icons": [
     {
-      "src": "/icons/logo-192.png",
-      "sizes": "192x192",
+      "src": "/icons/logo.png",
+      "sizes": "192x192 512x512 1024x1024",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/logo-512.png",
-      "sizes": "512x512",
+      "src": "/icons/logo.png",
+      "sizes": "512x512 1024x1024",
       "type": "image/png",
       "purpose": "maskable"
     }
